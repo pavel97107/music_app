@@ -1,5 +1,8 @@
 import React from "react";
 
+//imports component
+import {Player, Song} from './components'
+
 function App() {
   return (
     <div className="App">
