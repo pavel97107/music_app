@@ -1,17 +1,15 @@
-import React from 'react'
-
+import React from "react";
 
 //styles
-import './styles/_song.scss'
+import "./styles/_song.scss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
-    
-    return (
-        <div className="song-container">
-            <h1>Picture</h1>
-            <h1>Song name</h1>
-            <h1>Artist</h1>
-        </div>
-    )
-}
+export default ({ currentSong }) => {
+  return (
+    <div className="song-container">
+      <img src={currentSong.cover} />
+      <h2>{currentSong.name}</h2>
+      <h3>{currentSong.artist}</h3>
+    </div>
+  );
+};
