@@ -36,17 +36,28 @@ export default ({ currentSong, isPlaying, setIsPlaying }) => {
   };
 
   const timeUpdateHandler = ({ target }) => {
-    const current = getTime(target.currentTime);
-    const duration = getTime(target.duration);
+    const current = target.currentTime;
+    const duration = target.duration;
     setSongInfo({ ...songInfo, currentTime: current, duration: duration });
+  };
+
+  const dragHandler = ({ target }) => {
+    audioRef.current.currentTime = target.value;
+    setSongInfo({ ...songInfo, currentTime: target.value });
   };
 
   return (
     <div className="player">
       <div className="time-control">
-        <p>{songInfo.currentTime}</p>
-        <input type="range" />
-        <p>{songInfo.duration}</p>
+        <p>{getTime(songInfo.currentTime)}</p>
+        <input
+          min={0}
+          max={songInfo.duration}
+          value={songInfo.currentTime}
+          onChange={dragHandler}
+          type="range"
+        />
+        <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
