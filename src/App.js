@@ -1,14 +1,19 @@
 import React from "react";
 
-//imports component
-import {Player, Song} from './components'
+//import style
+import './styles/app.scss'
+
+//adding component
+import { Player, Song } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <h1>Music app</h1>
+      <Song />
+      <Player />
     </div>
   );
 }
 
 export default App;
+  
