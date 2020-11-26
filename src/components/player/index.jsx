@@ -4,6 +4,7 @@ import {
   faPlay,
   faAngleLeft,
   faAngleRight,
+  faPause
 } from "@fortawesome/free-solid-svg-icons";
 
 //styles
@@ -65,7 +66,7 @@ export default ({ currentSong, isPlaying, setIsPlaying }) => {
           className="play"
           onClick={playSongHandler}
           size="2x"
-          icon={faPlay}
+          icon={isPlaying ? faPause : faPlay}
         />
         <FontAwesomeIcon
           className="skip-forward"
