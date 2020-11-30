@@ -1,24 +1,26 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
   faAngleLeft,
   faAngleRight,
-  faPause
+  faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
 //styles
 import "./styles/_player.scss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ currentSong, isPlaying, setIsPlaying }) => {
+export default ({
+  currentSong,
+  timeUpdateHandler,
+  songInfo,
+  setSongInfo,
+  audioRef,
+  isPlaying,
+  setIsPlaying,
+}) => {
   //state
-  const [songInfo, setSongInfo] = useState({
-    currentTime: 0,
-    duration: 0,
-  });
-
-  const audioRef = useRef(null);
 
   const playSongHandler = () => {
     if (isPlaying) {
@@ -36,11 +38,7 @@ export default ({ currentSong, isPlaying, setIsPlaying }) => {
     );
   };
 
-  const timeUpdateHandler = ({ target }) => {
-    const current = target.currentTime;
-    const duration = target.duration;
-    setSongInfo({ ...songInfo, currentTime: current, duration: duration });
-  };
+
 
   const dragHandler = ({ target }) => {
     audioRef.current.currentTime = target.value;

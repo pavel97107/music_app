@@ -4,10 +4,28 @@ import React from "react";
 //import "./styles/_song.scss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ song, songs, setSongs, setCurrentSong }) => {
+export default React.memo(({
+  song,
+  songs,
+  setSongs,
+  isPlaying,
+  setIsPlaying,
+  audioRef,
+  setCurrentSong,
+}) => {
   const songSelectHandler = async () => {
-    setCurrentSong(song);
-    
+    await setCurrentSong(song);
+    audioRef.current.play();
+
+    if (isPlaying) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          audioRef.current.play();
+        });
+      }
+    }
+
     const newSongs = () => {
       return songs.map((newSong) => {
         if (newSong.id === song.id) {
@@ -23,7 +41,7 @@ export default ({ song, songs, setSongs, setCurrentSong }) => {
     setSongs(newSongs());
   };
 
-  console.log('render')
+  console.log("render");
 
   return (
     <div className="library-song" onClick={songSelectHandler}>
@@ -34,4 +52,4 @@ export default ({ song, songs, setSongs, setCurrentSong }) => {
       </div>
     </div>
   );
-};
+});
