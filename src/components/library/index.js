@@ -5,7 +5,7 @@ import LibrarySong from "./song";
 import "./styles/_library.scss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ songs, setSongs,isPlaying, setIsPlaying, audioRef, setCurrentSong }) => {
+export default ({ songs, setSongs,isPlaying, audioRef, setCurrentSong }) => {
   return (
     <div className="library">
       <h2>Library</h2>
@@ -13,9 +13,9 @@ export default ({ songs, setSongs,isPlaying, setIsPlaying, audioRef, setCurrentS
         {songs.map((song) => (
           <LibrarySong
           isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
             setCurrentSong={setCurrentSong}
             songs={songs}
+            active={song.active}
             song={song}
             key={song.id}
             setSongs={setSongs}

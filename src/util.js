@@ -10,7 +10,7 @@ export default function ChillPop() {
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10243",
       id: uuidv4(),
       color: ["#AA4438", "#E38A67"],
-      active: false,
+      active: true,
     },
     {
       name: "Zenith",
