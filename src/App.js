@@ -11,6 +11,8 @@ function App() {
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
 
+
+
   return (
     <div className="App">
       <Song currentSong={currentSong} />
@@ -19,7 +21,7 @@ function App() {
         setIsPlaying={setIsPlaying}
         currentSong={currentSong}
       />
-      <Library songs={songs} />
+      <Library songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} />
     </div>
   );
 }
