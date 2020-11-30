@@ -38,7 +38,7 @@ export default React.memo(
 
     return (
       <div
-        className={`library-song ${active && "selected"}`}
+        className={`library-song ${active ? "selected" : ""}`}
         onClick={songSelectHandler}
       >
         <img src={song.cover} alt={song.name} />

@@ -11,6 +11,17 @@
   h2 {
       padding: 2rem 2rem;
   }
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  opacity: 0;
 }
 
 .library-song {
@@ -61,4 +72,9 @@
 
 .selected {
   background-color: rgb(165, 181, 228);
+}
+
+.active-library {
+  transform: translateX(0%);
+  opacity: 1;
 }
