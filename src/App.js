@@ -16,6 +16,7 @@ function App() {
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
+    animationPercantage: 0,
   });
 
   const [libraryStatus, setLibraryStatus] = useState(false);
@@ -23,7 +24,17 @@ function App() {
   const timeUpdateHandler = ({ target }) => {
     const current = target.currentTime;
     const duration = target.duration;
-    setSongInfo({ ...songInfo, currentTime: current, duration: duration });
+    const roundedCurrent = Math.round(current);
+    const roundedDuration = Math.round(duration);
+    const animationPercantage = Math.round(
+      (roundedCurrent / roundedDuration) * 100
+    );
+    setSongInfo({
+      ...songInfo,
+      currentTime: current,
+      duration: duration,
+      animationPercantage: animationPercantage,
+    });
   };
 
   return (
