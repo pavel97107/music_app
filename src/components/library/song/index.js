@@ -35,7 +35,6 @@ export default React.memo(
       audioRef.current.play();
     };
 
-    console.log("render");
 
     return (
       <div
