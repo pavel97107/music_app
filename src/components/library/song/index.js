@@ -1,5 +1,4 @@
 import React from "react";
-import { playAudio } from "../../../util";
 
 //styles
 //import "./styles/_song.scss";
@@ -20,7 +19,6 @@ export default React.memo(
       await setCurrentSong(song);
       setIsPlaying(true);
 
-      
       const newSongs = () => {
         return songs.map((newSong) => {
           if (newSong.id === song.id) {
@@ -32,9 +30,9 @@ export default React.memo(
           }
         });
       };
-      
+
       setSongs(newSongs());
-      playAudio(isPlaying, audioRef);
+      audioRef.current.play();
     };
 
     console.log("render");

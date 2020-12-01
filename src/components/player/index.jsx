@@ -9,8 +9,6 @@ import {
 
 //styles
 import "./styles/_player.scss";
-import { playAudio } from "../../util";
-import song from "../song";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({
@@ -40,7 +38,7 @@ export default ({
     setSongs(newSongs());
   }, [currentSong]);
 
-  console.log('render player')
+  console.log("render player");
 
   const playSongHandler = () => {
     if (isPlaying) {
@@ -69,7 +67,7 @@ export default ({
     if (direction === "skip-back") {
       if ((currentSongX - 1) % songs.length === -1) {
         await setCurrentSong(songs[songs.length - 1]);
-        playAudio(isPlaying, audioRef);
+        audioRef.current.play();
         return;
       }
       await setCurrentSong(songs[(currentSongX - 1) % songs.length]);
@@ -79,7 +77,7 @@ export default ({
     }
 
     setIsPlaying(true);
-    playAudio(isPlaying, audioRef);
+    audioRef.current.play();
   };
 
   const stylesTrackAnim = {
