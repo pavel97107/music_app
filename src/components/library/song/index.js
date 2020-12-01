@@ -1,24 +1,26 @@
 import React from "react";
+import { playAudio } from "../../../util";
 
 //styles
 //import "./styles/_song.scss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default React.memo(
-  ({ song, songs, setSongs, isPlaying, audioRef, active, setCurrentSong }) => {
+  ({
+    song,
+    songs,
+    setSongs,
+    isPlaying,
+    setIsPlaying,
+    audioRef,
+    active,
+    setCurrentSong,
+  }) => {
     const songSelectHandler = async () => {
       await setCurrentSong(song);
-      audioRef.current.play();
+      setIsPlaying(true);
 
-      if (isPlaying) {
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            audioRef.current.play();
-          });
-        }
-      }
-
+      
       const newSongs = () => {
         return songs.map((newSong) => {
           if (newSong.id === song.id) {
@@ -30,8 +32,9 @@ export default React.memo(
           }
         });
       };
-
+      
       setSongs(newSongs());
+      playAudio(isPlaying, audioRef);
     };
 
     console.log("render");

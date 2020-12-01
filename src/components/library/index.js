@@ -12,6 +12,7 @@ export default ({
   isPlaying,
   audioRef,
   setCurrentSong,
+  setIsPlaying,
 }) => {
   return (
     <div className={`library ${libraryStatus ? "active-library" : ""}`}>
@@ -19,6 +20,7 @@ export default ({
       <div className="library-songs">
         {songs.map((song) => (
           <LibrarySong
+            setIsPlaying={setIsPlaying}
             isPlaying={isPlaying}
             setCurrentSong={setCurrentSong}
             songs={songs}

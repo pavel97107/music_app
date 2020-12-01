@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -9,10 +9,12 @@ import {
 
 //styles
 import "./styles/_player.scss";
+import { playAudio } from "../../util";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({
   songs,
+  setSongs,
   currentSong,
   setCurrentSong,
   timeUpdateHandler,
@@ -22,6 +24,21 @@ export default ({
   isPlaying,
   setIsPlaying,
 }) => {
+  useEffect(() => {
+    const newSongs = () => {
+      return songs.map((newSong) => {
+        if (newSong.id === currentSong.id) {
+          newSong.active = true;
+          return newSong;
+        } else {
+          newSong.active = false;
+          return newSong;
+        }
+      });
+    };
+    setSongs(newSongs());
+  }, [currentSong]);
+
   //state
 
   const playSongHandler = () => {
@@ -51,15 +68,17 @@ export default ({
     if (direction === "skip-back") {
       if ((currentSongX - 1) % songs.length === -1) {
         await setCurrentSong(songs[songs.length - 1]);
-        audioRef.current.play();
+        playAudio(isPlaying, audioRef);
         return;
       }
       await setCurrentSong(songs[(currentSongX - 1) % songs.length]);
-      audioRef.current.play();
-    } else if (direction === "skip-forward") {
-      await setCurrentSong(songs[(currentSongX + 1) % songs.length]);
-      audioRef.current.play();
     }
+    if (direction === "skip-forward") {
+      await setCurrentSong(songs[(currentSongX + 1) % songs.length]);
+    }
+
+    setIsPlaying(true);
+    playAudio(isPlaying, audioRef);
   };
 
   return (
@@ -73,7 +92,7 @@ export default ({
           onChange={dragHandler}
           type="range"
         />
-        <p>{getTime(songInfo.duration)}</p>
+        <p>{songInfo.duration ? getTime(songInfo.duration) : "0:00"}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon
