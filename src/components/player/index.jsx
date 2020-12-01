@@ -10,6 +10,7 @@ import {
 //styles
 import "./styles/_player.scss";
 import { playAudio } from "../../util";
+import song from "../song";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({
@@ -39,7 +40,7 @@ export default ({
     setSongs(newSongs());
   }, [currentSong]);
 
-  //state
+  console.log('render player')
 
   const playSongHandler = () => {
     if (isPlaying) {
@@ -129,6 +130,7 @@ export default ({
         onLoadedMetadata={timeUpdateHandler}
         ref={audioRef}
         src={currentSong.audio}
+        onEnded={() => skipTrackHandler("skip-forward")}
       ></audio>
     </div>
   );
